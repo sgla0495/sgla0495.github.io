@@ -1,0 +1,99 @@
+<html lang="en">
+<head>
+	
+	<title>The Drink Lord</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<link href="https://fonts.googleapis.com/css2?family=Jost&display=swap" rel="stylesheet">
+</head>
+
+<body>
+	<div id='top' overflow='hidden'>
+	<h1 id='title'> Drinking Data </h1>
+	
+
+	
+	<table> 
+		<tr> 
+			<td><p><b><p>Standards:&nbsp;<input type="number" id="quantity">&nbsp;</p>
+	</b></p></td><td><button id='adddrink' class='btn' onclick='adddrink()'>Add Drink</button></td>
+		</tr>
+		<tr> 
+			<td><p>&nbsp;</p></td><td></td>
+		</tr>
+		<tr> 
+			<td><p><b>Nights Total:</b></p></td><td></td>
+		</tr>
+		<tr> 
+			<td> <p id='Standardst'>Standards: </p> <td><p id='Standards'> </p></td>
+		</tr>
+		<tr>
+			<td><p id='Minutest'>Minutes: </p></td><td><p id='Minutes'> </td>
+		</tr>
+		<tr>
+			<td><p id='StartTimet'>Start Time:</p></td><td><p id='StartTime'></p></td>
+		</tr>
+		<tr>
+			<td><p id='Hourly Avgt'>Hourly Avg:</p></td><td><p id='Hourly Avg'></p></td>
+		</tr>
+		<tr> 
+			<td><p>&nbsp;</p></td><td></td>
+		</tr>
+		<tr>
+			<td><p><b>Data:</b></p></td><td><button id='clearbut' class='btn' onclick='ClearData()'>Clear Data</button></td><td><button id='copybut' class='btn' onclick='CopyData()'>Copy Data</button></td>
+		</tr>
+	</table>
+	</div> 
+	
+
+	<div id='listspace'></div> 
+	
+
+	
+	<script src='script.js'></script>
+	<script>
+	
+	function adddrink() {
+		stds = document.getElementById('quantity').value;
+		if (testforbadinput(stds) == true) {
+
+		}
+		else {
+			if (list.length == 0) {
+				list.push([stds,getutime()]);
+				
+			}
+			else {
+				list[list.length - 1][1] = getutime() - list[list.length - 1][1];
+				list.push([stds,getutime()]);
+			}
+			listclone = JSON.parse(JSON.stringify(list));
+			listclone = listadjust(listclone);
+			localStorage.setItem('Data',JSON.stringify(list));
+			
+			updatedisp(listclone);
+		}
+	}
+
+	
+
+	function ClearData() {
+		confstate = confirm('Are you sure you want to clear all data?')
+		if (confstate == true) {
+			cleardatadisp()
+			list = []
+			localStorage.setItem('Data',JSON.stringify(list));
+		}
+	}
+
+
+	if (JSON.parse(localStorage.getItem('Data')) === null || JSON.parse(localStorage.getItem('Data')).length === 0) {
+		var list = []
+	}
+	else {
+		var list = JSON.parse(localStorage.getItem('Data'));
+	}	
+	updatedisp(list)
+
+	</script>
+</body>
+</html>
