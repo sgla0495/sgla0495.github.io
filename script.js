@@ -68,3 +68,15 @@ function getstarttime() {
     var nd = new Date(utc + (3600000*10));
     return nd.toLocaleString();;
 }
+
+function CopyData() {
+	confstate = confirm(JSON.stringify(list))
+}
+
+function d1() {
+	document.getElementById('cover').style.visibility = 'visible'
+
+	listclone2 = JSON.parse(JSON.stringify(list));
+	listclone2 = listadjust(listclone2);
+	graph(listclone2)
+}

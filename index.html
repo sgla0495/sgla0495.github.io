@@ -10,8 +10,9 @@
 	<div id='top' overflow='hidden'>
 	<h1 id='title'> Drinking Data </h1>
 	
-
-	
+	<div id='cover'> 
+		<div id="chartContainer" style="height: 300px; width: 100%;"></div>
+	</div>
 	<table> 
 		<tr> 
 			<td><p><b><p>Standards:&nbsp;<input type="number" id="quantity">&nbsp;</p>
@@ -21,7 +22,7 @@
 			<td><p>&nbsp;</p></td><td></td>
 		</tr>
 		<tr> 
-			<td><p><b>Nights Total:</b></p></td><td></td>
+			<td><p><b>Total:</b></p></td><td></td>
 		</tr>
 		<tr> 
 			<td> <p id='Standardst'>Standards: </p> <td><p id='Standards'> </p></td>
@@ -41,15 +42,18 @@
 		<tr>
 			<td><p><b>Data:</b></p></td><td><button id='clearbut' class='btn' onclick='ClearData()'>Clear Data</button></td><td><button id='copybut' class='btn' onclick='CopyData()'>Copy Data</button></td>
 		</tr>
+		<!--<tr>
+			<td><p><b>&nbsp;</b></p></td><td><button id='d1' class='doh' onclick='d1()'>Disp Data1</button></td><td><button id='d2' class='doh' onclick='d2()'>Disp Data2</button></td>
+		</tr>-->
+
 	</table>
 	</div> 
 	
 
 	<div id='listspace'></div> 
-	
-
-	
+	<script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 	<script src='script.js'></script>
+	<script src='graph.js'></script>
 	<script>
 	
 	function adddrink() {
@@ -77,8 +81,8 @@
 	
 
 	function ClearData() {
-		confstate = confirm('Are you sure you want to clear all data?')
-		if (confstate == true) {
+		confstate = prompt('To confirm this isn\'t accidental enter: 1qaz2wsx0okm9ijn')
+		if (confstate == '1qaz2wsx0okm9ijn') {
 			cleardatadisp()
 			list = []
 			localStorage.setItem('Data',JSON.stringify(list));
@@ -93,7 +97,6 @@
 		var list = JSON.parse(localStorage.getItem('Data'));
 	}	
 	updatedisp(list)
-
 	</script>
 </body>
 </html>
